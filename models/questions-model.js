@@ -1,7 +1,25 @@
-const db = require('../../server/db-connect.js');
+const mysql = require('mysql2');
+const { mysqlPassword } = require('../config.js');
+
+questionsDbConnection = mysql.createConnection({
+  user: 'root',
+  password: mysqlPassword,
+  database: 'QuestionsAnswers',
+  // host: 'mysql2sdc',
+  // port: '3306',
+});
+
+questionsDbConnection.connect(function (error) {
+  if (error) {
+    console.log('Error connecting to Questions_Db: ', error);
+  } else {
+    console.log('Connected to Questions Db!');
+  }
+});
+
+const db = questionsDbConnection;
 
 module.exports = {
-  // Questions
   modelsGetQuestions: (product_id, callback) => {
     const getQuestionsQuery = `SELECT id, product_id, body, date_written, asker_name, asker_email, reported, helpful
      FROM Questions
@@ -16,7 +34,6 @@ module.exports = {
       }
     });
   },
-
   modelsPostQuestion: (params, callback) => {
     let date = new Date().toISOString().slice(0, 10);
     const postQuestionsQuery = `INSERT INTO Questions (product_id, body, date_written, asker_name, asker_email, reported, helpful)
@@ -31,7 +48,6 @@ module.exports = {
       }
     });
   },
-
   modelsHelpfulQuestion: (question_id, callback) => {
     const putHelpfulQuestionQuery = `UPDATE Questions
      SET helpful = helpful + 1
@@ -45,7 +61,6 @@ module.exports = {
       }
     });
   },
-
   modelsReportQuestion: (question_id, callback) => {
     const putReportQuestionQuery = `UPDATE Questions
      SET reported = 1
@@ -59,8 +74,6 @@ module.exports = {
       }
     });
   },
-
-  // Answers
   modelsGetAnswers: (question_id, callback) => {
     const getAnswersQuery = `SELECT *,
       (SELECT JSON_ARRAYAGG((JSON_object('id', Photos.id, 'url', Photos.url)))
@@ -73,15 +86,10 @@ module.exports = {
       if (error) {
         console.log('Error with getQuestions query: ', error);
       } else {
-        // iterate through results and parse - do not need for mysql2
-        // for (item of result) {
-        //   item.Photos = JSON.parse(item.Photos);
-        // }
         callback(null, result);
       }
     });
   },
-
   modelsPostAnswer: (params, callback) => {
     let date = new Date().toISOString().slice(0, 10);
     const postAnswersQuery = 
@@ -96,7 +104,6 @@ module.exports = {
       }
     });
   },
-
   modelsHelpfulAnswer: (answer_id, callback) => {
     const putHelpfulAnswerQuery = `UPDATE Answers
      SET helpful = helpful + 1
@@ -110,7 +117,6 @@ module.exports = {
       }
     });
   },
-
   modelsReportAnswer: (answer_id, callback) => {
     const putReportAnswerQuery = `UPDATE Answers
      SET reported = 1
