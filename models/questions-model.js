@@ -6,7 +6,7 @@ questionsDbConnection = mysql.createConnection({
   password: mysqlPassword,
   database: 'QuestionsAnswers',
   // host: 'mysql2sdc',
-  // port: '3306',
+  port: '3306',
 });
 
 questionsDbConnection.connect(function (error) {

@@ -33,8 +33,6 @@ CREATE TABLE IF NOT EXISTS Photos (
 );
 -- Query OK, 0 rows affected (0.01 sec)
 
-
-
 LOAD DATA LOCAL INFILE '/Users/christopherliang/Desktop/Systems\ Design\ Capstone/starting-point/data-clean/questions-clean.csv'
 INTO TABLE Questions
 FIELDS TERMINATED BY ','
@@ -85,8 +83,6 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (id, answer_id, url);
 -- Query for uploading to Docker
-
-
 
 CREATE INDEX product_id_index ON Questions (product_id);
 CREATE INDEX question_id_index ON Answers (question_id);
