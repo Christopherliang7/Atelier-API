@@ -2,12 +2,10 @@ version: "3"
 
 services:
   webserver:
-    image: ""
+    image: "chl9159/sdc"
     restart: always
     ports:
       - "3000:3000"
-    # volumes:
-    #   - ./websites:/user/share/node/html
     depends_on:
       - mysql_db
     links:
@@ -17,10 +15,7 @@ services:
     image: "mysql:latest"
     environment:
       - MYSQL_ROOT_PASSWORD="chris"
+      - MYSQL_ROOT_HOST=%
     restart: always
-    ports: "3306:3306"
-    # volumes:
-    #   - db_vol:/var/lib/mysql
-  
-# volumes:
-#   - db_vol:
+    ports: 
+      - "3307:3306"
