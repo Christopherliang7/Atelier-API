@@ -6,10 +6,9 @@ const {
   modelsHelpfulQuestion, 
   modelsReportQuestion, 
   modelsHelpfulAnswer, 
-  modelsReportAnswer } = require('../../models/Questions/questions-model');
+  modelsReportAnswer } = require('../models/questions-model');
 
 module.exports = {
-  // Questions
   getQuestions: (req, res) => {
     modelsGetQuestions(req.params.product_id, (error, result) => {
       if (error) {
@@ -20,7 +19,6 @@ module.exports = {
       }
     });
   },
-
   postQuestion: (req, res) => {
     const params = [req.params.product_id, req.body.body, req.body.asker_name, req.body.asker_email];
     modelsPostQuestion(params, (error, result) => {
@@ -32,7 +30,6 @@ module.exports = {
       }
     });
   },
-
   helpfulQuestion: (req, res) => {
     modelsHelpfulQuestion(req.params.question_id, (error, result) => {
       if (error) {
@@ -42,7 +39,6 @@ module.exports = {
       }
     });
   },
-
   reportQuestion: (req, res) => {
     modelsReportQuestion(req.params.question_id, (error, result) => {
       if (error) {
@@ -52,8 +48,6 @@ module.exports = {
       }
     });
   },
-
-  // Answers
   getAnswers: (req, res) => {
     modelsGetAnswers(req.params.question_id, (error, result) => {
       if (error) {
@@ -64,7 +58,6 @@ module.exports = {
       }
     });
   },
-
   postAnswer: (req, res) => {
     const params = [req.params.question_id, req.body.body, req.body.answerer_name, req.body.answerer_email];
     modelsPostAnswer(params, (error, result) => {
@@ -76,7 +69,6 @@ module.exports = {
       }
     });
   },
-
   helpfulAnswer: (req, res) => {
     modelsHelpfulAnswer(req.params.answer_id, (error, result) => {
       if (error) {
@@ -86,7 +78,6 @@ module.exports = {
       }
     });
   },
-
   reportAnswer: (req, res) => {
     modelsReportAnswer(req.params.answer_id, (error, result) => {
       if (error) {
@@ -95,9 +86,5 @@ module.exports = {
         res.send();
       }
     });
-  },
-
-  loader: (req, res) => {
-    res.send('loaderio-6be18468164873050a640656d167a97f');
   }
 };
