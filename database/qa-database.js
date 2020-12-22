@@ -7,7 +7,6 @@ questionsDbConnection = mysql.createConnection({
   database: 'QuestionsAnswers',
   // host: 'mysql1',
   // port: '3306',
-  // socketPath: '/tmp/mysql.sock',
 });
 
 questionsDbConnection.connect(function (error) {
