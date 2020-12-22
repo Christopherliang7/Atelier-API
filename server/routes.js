@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const QuestionsController = require('../controllers/questions-controller.js');
-const AnswersController = require('../controllers/answers-controller.js');
+const QuestionsController = require('./controllers/questions-controller.js');
+const AnswersController = require('./controllers/answers-controller.js');
 
 // Questions
 router.get('/qa/:product_id', QuestionsController.getQuestions);

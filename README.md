@@ -29,8 +29,6 @@
 * [JQuery](https://jquery.com)
 * [Laravel](https://laravel.com)
 
-
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
