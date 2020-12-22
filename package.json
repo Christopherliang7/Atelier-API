@@ -14,12 +14,11 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "mysql": "^2.18.1",
-    "mysql2": "^2.2.5",
-    "nodemon": "^1.19.4"
+    "mysql2": "^2.2.5"
   },
   "devDependencies": {
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "nodemon": "^1.19.4"
   }
 }

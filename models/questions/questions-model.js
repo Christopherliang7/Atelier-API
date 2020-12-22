@@ -1,21 +1,22 @@
-const mysql = require('mysql2');
-const { mysqlPassword } = require('../config.js');
+// const mysql = require('mysql2');
+// const { mysqlPassword } = require('../../config.js');
 
-questionsDbConnection = mysql.createConnection({
-  user: 'root',
-  password: mysqlPassword,
-  database: 'QuestionsAnswers',
-  host: '127.0.0.1',
-  port: '3307',
-});
+// questionsDbConnection = mysql.createConnection({
+//   user: 'root',
+//   password: mysqlPassword,
+//   database: 'QuestionsAnswers',
+//   // host: 'mysql1',
+//   // port: '3306',
+//   // socketPath: '/tmp/mysql.sock',
+// });
 
-questionsDbConnection.connect(function (error) {
-  if (error) {
-    console.log('Error connecting to Questions_Db: ', error);
-  } else {
-    console.log('Connected to Questions Db!');
-  }
-});
+// questionsDbConnection.connect(function (error) {
+//   if (error) {
+//     console.log('Error connecting to Questions_Db: ', error);
+//   } else {
+//     console.log('Connected to Questions Db!');
+//   }
+// });
 
 // questionsDbConnection = mysql.createPool({
 //   user: 'root',
@@ -34,7 +35,9 @@ questionsDbConnection.connect(function (error) {
 //   }
 // });
 
-const db = questionsDbConnection;
+const db = require('../../database/qa-database.js').questionsDbConnection;
+// import { questionsDbConnection } from '../../database/qa-database.js';
+// const db = questionsDbConnection;
 
 module.exports = {
   modelsGetQuestions: (product_id, callback) => {

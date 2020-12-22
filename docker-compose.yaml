@@ -7,15 +7,18 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - mysql_db
+      - mysql1
     links:
-      - mysql_db
+      - mysql1
 
-  mysql_db:
+  mysql1:
     image: "mysql:latest"
     environment:
-      - MYSQL_ROOT_PASSWORD="chris"
-      - MYSQL_ROOT_HOST=%
+      MYSQL_ROOT_PASSWORD: "chris"
+      MYSQL_USER: "root"
+      MYSQL_ROOT_HOST: '%'
     restart: always
+    expose: 
+      - "3306"
     ports: 
-      - "3307:3306"
+      - "3306:3306"

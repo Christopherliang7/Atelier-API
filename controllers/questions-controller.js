@@ -6,7 +6,7 @@ const {
   modelsHelpfulQuestion, 
   modelsReportQuestion, 
   modelsHelpfulAnswer, 
-  modelsReportAnswer } = require('../models/questions-model');
+  modelsReportAnswer } = require('../models/questions/questions-model');
 
 module.exports = {
   getQuestions: (req, res) => {
