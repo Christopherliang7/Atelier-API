@@ -5,8 +5,8 @@ config:
 
   phases:
     # Create 100 virtual users every second for 60 seconds
-    - duration: 60 # seconds
-      arrivalRate: 100 # virtual users
+    - duration: 30 # seconds
+      arrivalRate: 500 # virtual users
       name: "Load test - user interation rate"
 
 scenarios:
@@ -16,23 +16,23 @@ scenarios:
           url: "/qa/5"
       - get:
           url: "/qa/5/answers"
-      - post: 
-          url: "/qa/20"
-          json:
-            body: "Artillery Testing"
-            asker_name: "Artillery" 
-            asker_email: "Artillery@Artillery.com"
-      - post: 
-          url: "/qa/10/answers"
-          json:
-            body: "Artillery Testing"
-            answerer_name: "Artillery"
-            answerer_email: "Artillery@Artillery.com"
-      - put:
-          url: "/qa/question/10/helpful"
-      - put:
-          url: "/qa/question/10/report"
-      - put:
-          url: "/qa/answer/5/helpful"
-      - put:
-          url: "/qa/answer/5/report"
+      # - post: 
+      #     url: "/qa/20"
+      #     json:
+      #       body: "Artillery Testing"
+      #       asker_name: "Artillery" 
+      #       asker_email: "Artillery@Artillery.com"
+      # - post: 
+      #     url: "/qa/10/answers"
+      #     json:
+      #       body: "Artillery Testing"
+      #       answerer_name: "Artillery"
+      #       answerer_email: "Artillery@Artillery.com"
+      # - put:
+      #     url: "/qa/question/10/helpful"
+      # - put:
+      #     url: "/qa/question/10/report"
+      # - put:
+      #     url: "/qa/answer/5/helpful"
+      # - put:
+      #     url: "/qa/answer/5/report"

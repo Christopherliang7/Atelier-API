@@ -5,6 +5,8 @@ const {
   modelsReportQuestion, 
 } = require('../models/questions-model');
 
+const redisClient = require('../database/qa-redis').client;
+
 module.exports = {
   getQuestions: (req, res) => {
     const { product_id } = req.params;

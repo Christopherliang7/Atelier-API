@@ -5,6 +5,8 @@ const {
   modelsReportAnswer, 
 } = require('../models/answers-model');
 
+const redisClient = require('../database/qa-redis').client;
+
 module.exports = {
   getAnswers: (req, res) => {
     const { question_id } = req.params;
