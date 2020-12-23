@@ -5,30 +5,17 @@ const {
   modelsReportQuestion, 
 } = require('../models/questions-model');
 
-const redisClient = require('../database/qa-redis').client;
-const { promisify } = require('util');
-const getPromise = promisify(redisClient.get).bind(redisClient);
-
 module.exports = {
   getQuestions: (req, res) => {
     const { product_id } = req.params;
-    getPromise(`Question ${product_id}`)
-      .then((data) => { 
-        if (data !== null) {
-          let result = JSON.parse(data);
-          res.json(result);
-        } else {
-          modelsGetQuestions(product_id, (error, result) => {
-            if (error) {
-              res.status(500).send('Error with getting questions!');
-            } else {
-              redisClient.setex(`Question ${product_id}`, 3600, JSON.stringify(result));
-              res.send(result);
-            }
-          });
-        }
-      })
-      .catch((error) => console.log('Error with Redis GetQuestions:', error));
+    modelsGetQuestions(product_id, (error, result) => {
+      if (error) {
+        res.status(500).send('Error with getting questions!');
+      } else {
+        redisClient.setex(`Question ${product_id}`, 3600, JSON.stringify(result));
+        res.send(result);
+      }
+    });
   },
 
   postQuestion: (req, res) => {

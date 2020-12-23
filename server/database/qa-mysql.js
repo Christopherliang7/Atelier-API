@@ -5,8 +5,8 @@ questionsDbConnection = mysql.createPool({
   user: 'root',
   password: mysqlPassword,
   database: 'QuestionsAnswers',
-  // host: 'mysql1',
-  // port: '3306',
+  host: 'mysql1',
+  port: '3306',
   connectionLimit: 10
 });
 
