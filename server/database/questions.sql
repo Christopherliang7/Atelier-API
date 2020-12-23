@@ -42,7 +42,7 @@ IGNORE 1 ROWS
 -- Query OK, 3521634 rows affected, 4 warnings (19.85 sec)
 -- Records: 3521634  Deleted: 0  Skipped: 0  Warnings: 4
 
-LOAD DATA LOCAL INFILE '/cleaned-data/questions-clean.csv'
+LOAD DATA LOCAL INFILE '/clean-data/questions-clean.csv'
 INTO TABLE Questions
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
@@ -59,7 +59,7 @@ IGNORE 1 ROWS
 -- Query OK, 12392946 rows affected, 28 warnings (59.05 sec)
 -- Records: 12392946  Deleted: 0  Skipped: 0  Warnings: 28
 
-LOAD DATA LOCAL INFILE '/cleaned-data/answers-cleaned.csv'
+LOAD DATA LOCAL INFILE '/clean-data/answers-clean.csv'
 INTO TABLE Answers
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
@@ -76,7 +76,7 @@ IGNORE 1 ROWS
 -- Query OK, 3717892 rows affected (19.17 sec)
 -- Records: 3717892  Deleted: 0  Skipped: 0  Warnings: 0
 
-LOAD DATA LOCAL INFILE '/cleaned-data/photos-cleaned.csv'
+LOAD DATA LOCAL INFILE '/clean-data/photos-clean.csv'
 INTO TABLE Photos
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'

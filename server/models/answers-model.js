@@ -1,4 +1,4 @@
-const db = require('../database/qa-database.js').questionsDbConnection;
+const db = require('../database/qa-mysql.js').questionsDbConnection;
 
 module.exports = {
   modelsGetAnswers: (question_id, callback) => {
@@ -11,7 +11,6 @@ module.exports = {
     // Query Time After Indexing: 6.7 ms
     db.query(getAnswersQuery, (error, result) => {
       if (error) {
-        console.log('Error with getAnswers query: ', error);
         throw new Error('Problem getting Answers!');
       } else {
         callback(null, result);
@@ -27,7 +26,6 @@ module.exports = {
     // Query Time After Indexing: 8.1 ms
     db.query(postAnswersQuery, params, (error, result) => {
       if (error) {
-        console.log('Error with postAnswers query: ', error);
         throw new Error('Problem posting Answers!');
       } else {
         callback(null, result);
@@ -42,7 +40,6 @@ module.exports = {
     // Query Time After Indexing: 10 ms
     db.query(putHelpfulAnswerQuery, (error, result) => {
       if (error) {
-        console.log('Error with helpfulAnswer query: ', error);
         throw new Error('Problem selecting Answer as helpful!');
       } else {
         callback(null, result);
@@ -57,7 +54,6 @@ module.exports = {
     // Query Time After Indexing: 8.2 ms
     db.query(putReportAnswerQuery, (error, result) => {
       if (error) {
-        console.log('Error with reportAnswer query: ', error);
         throw new Error('Problem reporting Answer!');
       } else {
         callback(null, result);

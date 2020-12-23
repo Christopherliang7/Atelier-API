@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "redis": "^3.0.2"
   },
   "devDependencies": {
     "webpack": "^4.44.2",

@@ -5,23 +5,35 @@ const {
   modelsReportAnswer, 
 } = require('../models/answers-model');
 
+const redisClient = require('../database/qa-redis').client;
+const { promisify } = require('util');
+const getPromise = promisify(redisClient.get).bind(redisClient);
+
 module.exports = {
   getAnswers: (req, res) => {
-    modelsGetAnswers(req.params.question_id, (error, result) => {
-      if (error) {
-        console.log('Error with getting Answers in Controller: ', error);
-        res.status(500).send('Error getting answers!');
-      } else {
-        res.send(result);
-      }
-    });
+    const { question_id } = req.params;
+    getPromise(`Answers ${question_id}`)
+      .then((data) => { 
+        if (data !== null) {
+          let result = JSON.parse(data);
+          res.json(result);
+        } else {
+          modelsGetAnswers(question_id, (error, result) => {
+            if (error) {
+              res.status(500).send('Error getting answers!');
+            } else {
+              redisClient.setex(`Answers ${question_id}`, 3600, JSON.stringify(result));
+              res.send(result);
+            }
+          });
+        }
+      });
   },
 
   postAnswer: (req, res) => {
     const params = [req.params.question_id, req.body.body, req.body.answerer_name, req.body.answerer_email];
     modelsPostAnswer(params, (error, result) => {
       if (error) {
-        console.log('Error with posting Answers in Controller: ', error);
         res.status(500).send('Error posting answers!');
       } else {
         res.send();
@@ -32,7 +44,6 @@ module.exports = {
   helpfulAnswer: (req, res) => {
     modelsHelpfulAnswer(req.params.answer_id, (error, result) => {
       if (error) {
-        console.log('Error with updating helpful answers: ', error);
         res.status(500).send('Error selecting answer as helpful!');
       } else {
         res.send();
@@ -43,7 +54,6 @@ module.exports = {
   reportAnswer: (req, res) => {
     modelsReportAnswer(req.params.answer_id, (error, result) => {
       if (error) {
-        console.log('Error with reporting answers: ', error);
         res.status(500).send('Error reporting answers!');
       } else {
         res.send();
